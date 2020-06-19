@@ -1,0 +1,34 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8"> 
+	<title>Todo App</title>
+</head>
+
+<body> 
+    <h1>Todo List</h1>
+    <h3>ADD NEW LIST</h3>
+    <form action='/addlist' method="POST">
+        <input type="text" name="name">LIST TITLE
+        <input type="text" name="description">DESCRIPTION
+        <input type="submit">
+    </form>
+        {% for list in lists%}
+            <h3>ADD NEW TASK</h3>
+                <form action="/{{list.id}}/add" method="POST"> 
+                    <input type="text" name="name">TASK TITLE
+                    <input type="text" name="description">DESCRIPTION
+                    <input type="submit"> 
+                </form>
+                <ul> 
+                    {% for task in tasks %}
+                        <li>
+                            {% if task.done %} <strike> {% endif %}{{ task.name }} {{task.description}} {% if task.done %} </strike>{% endif %}
+                            <a href="/done/{{ task.id }}">Done</a>
+                            <a href="/delete/{{ task.id }}">Delete</a>
+                        </li>
+                    {% endfor %}
+                </ul> 
+        {% endfor %}
+</body> 
+</html> 
