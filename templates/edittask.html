@@ -1,0 +1,8 @@
+{% include "base.html" %}
+<h3>EDIT TASK {{ task.name }}</h3>
+    <form action="/{{ list.id }}/{{ task.id }}/updatetask" method="POST"> 
+        <input type="text" name="name" value="{{ task.name }}">TASK TITLE
+        <input type="text" name="description" value="{{ task.description }}">DESCRIPTION
+        <input type="number" name="priority" min="1" max="5" value="{{task.priority}}">Priority
+        <input type="submit"> 
+    </form>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        {% for list in lists %}
+        <div class="card">
+            <h2>List number {{ list.id }} </h2><a href="/{{list.id}}/newtask"><button class="btn">New Task</button></a>
+                <ul class="list"> 
+                    {% for task in list.tasks %}
+                        <li class="item">
+                            {% if task.done %} <strike> {% endif %}{{ task.name }} {{task.description}} {{task.priority}}{% if task.done %} </strike>{% endif %}
+                            <form action="/{{ list.id }}/{{ task.id }}/completetask" method="POST">
+                                <button type="submit" name="done" value="{{ task.id }}" value="{{ list.id }}">{% if task.done %} Renew {% else %} Done {% endif %}</button> 
+                                <button type="submit" formaction="/{{ list.id }}/{{ task.id }}/deletetask" name="delete" value="{{ task.id }}" value="{{ list.id }}">Delete</button>
+                                <button type="submit" formaction="/{{ list.id }}/{{ task.id }}/edittask" name="edit" value="{{ task.id }}" value="{{ list.id }}">Edit</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul> 
+        </div>     
+        {% endfor %}
+    </div>
+{% endblock %}
+

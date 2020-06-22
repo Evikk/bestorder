@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles copy 5.css">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>To Do App</title>
+</head>
+<body>
+    {% block nav %}
+    <ul class="navbar">
+       <li><a href="/newlist" class="btn"><span>Add New List</span></a></li>
+       <li><img src="/static/logo.png" class="logo"></li>
+       <li><form action="/show" method="POST">
+           <select class="select-css" name="list_select">
+                {% for list in list_options %}
+                <option value="{{ list.id }}">{{ list.name }}</option>
+                {% endfor %}
+                <option>All Lists</option>
+           </select>
+           <button type="submit">Show List</button>
+       </form></li>
+       <!-- onchange="this.form.submit()" -->
+       <li>
+        
+    {% endblock %}
+        
+       </li>
+    </ul>
+    
+    {% block content %}
+    {% endblock %}
+    {% block newlist %}
+    {% endblock %}
+</body>
+</html>
