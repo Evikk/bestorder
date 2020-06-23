@@ -64,6 +64,18 @@ def add_list():
     list_options = List.query.all()
     return render_template ('tasks.html', lists=lists, tasks=tasks, list_options=list_options)
 
+@app.route('/<list_id>/deletelist', methods=['POST'])
+def delete_list(list_id):
+    
+    tasks = List.query.filter(List.tasks).all()
+    lists = List.query.all()
+    list_options = List.query.all()
+    list = List.query.filter(List.id == list_id).first()
+    db.session.delete(list)
+    db.session.commit()
+
+    return render_template ('base.html', lists=lists, tasks=tasks, list_options=list_options)
+
 @app.route('/<list_id>/addtask', methods=['POST'])
 def add_task(list_id):
     

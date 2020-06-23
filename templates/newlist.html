@@ -1,10 +1,14 @@
 {% include "tasks.html" %}
 {% block newlist %}
-<h3>ADD NEW LIST</h3>
-    <form action='/addlist' method="POST">
-        <input type="text" name="name">LIST TITLE
-        <input type="text" name="description">DESCRIPTION
-        <input type="submit">
-    </form>
+<div class="container">
+    <div class="new-list-card">
+    <h3>ADD NEW LIST</h3>
+        <form action='/addlist' method="POST">
+            <input class="input-css" type="text" name="name" placeholder="List Title">
+            <input class="input-css" type="text" name="description" placeholder="Description">
+            <div class="c-btn"><input class="card-btn" type="submit"></div>
+        </form>
+    </div>
+</div>
 {% endblock %}
 

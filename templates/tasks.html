@@ -4,15 +4,23 @@
     <div class="container">
         {% for list in lists %}
         <div class="card">
-            <h2>List number {{ list.id }} </h2><a href="/{{list.id}}/newtask"><button class="btn">New Task</button></a>
+            <div class="nav-list">
+                <div class="list-title">
+                    <h2>{{ list.name }} </h2>
+                </div>
+                <div class="list-icons">
+                    <button class="card-btn"><a href="/{{list.id}}/newtask"><span>+</span></a></button>
+                    <form action="/{{list.id}}/deletelist" method="POST"><button class="card-btn"><img class="icon-task" src="/static/delete.svg"></button></form>
+                </div>
+            </div>
                 <ul class="list"> 
-                    {% for task in list.tasks %}
+                    {% for task in list.tasks | sort (attribute='priority')%}
                         <li class="item">
                             {% if task.done %} <strike> {% endif %}{{ task.name }} {{task.description}} {{task.priority}}{% if task.done %} </strike>{% endif %}
                             <form action="/{{ list.id }}/{{ task.id }}/completetask" method="POST">
-                                <button type="submit" name="done" value="{{ task.id }}" value="{{ list.id }}">{% if task.done %} Renew {% else %} Done {% endif %}</button> 
-                                <button type="submit" formaction="/{{ list.id }}/{{ task.id }}/deletetask" name="delete" value="{{ task.id }}" value="{{ list.id }}">Delete</button>
-                                <button type="submit" formaction="/{{ list.id }}/{{ task.id }}/edittask" name="edit" value="{{ task.id }}" value="{{ list.id }}">Edit</button>
+                                <button class="card-btn" type="submit" name="done" value="{{ task.id }}" value="{{ list.id }}"><img class="icon-task" src="/static/check.svg"></button> 
+                                <button class="card-btn" type="submit" formaction="/{{ list.id }}/{{ task.id }}/deletetask" name="delete" value="{{ task.id }}" value="{{ list.id }}"><img class="icon-task" src="/static/delete.svg"></button>
+                                <button class="card-btn" type="submit" formaction="/{{ list.id }}/{{ task.id }}/edittask" name="edit" value="{{ task.id }}" value="{{ list.id }}"><img class="icon-task" src="/static/edit.svg"></button>
                             </form>
                         </li>
                     {% endfor %}
