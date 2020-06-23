@@ -13,7 +13,8 @@
                     <form action="/{{list.id}}/deletelist" method="POST"><button class="card-btn"><img class="icon-task" src="/static/delete.svg"></button></form>
                 </div>
             </div>
-                <ul class="list"> 
+                <ul class="list">
+                    {% if view == 'priority' %} 
                     {% for task in list.tasks | sort (attribute='priority')%}
                         <li class="item">
                             {% if task.done %} <strike> {% endif %}{{ task.name }} {{task.description}} {{task.priority}}{% if task.done %} </strike>{% endif %}
@@ -24,6 +25,18 @@
                             </form>
                         </li>
                     {% endfor %}
+                    {% else %}
+                    {% for task in list.tasks | sort (attribute='done')%}
+                        <li class="item">
+                            {% if task.done %} <strike> {% endif %}{{ task.name }} {{task.description}} {{task.priority}}{% if task.done %} </strike>{% endif %}
+                            <form action="/{{ list.id }}/{{ task.id }}/completetask" method="POST">
+                                <button class="card-btn" type="submit" name="done" value="{{ task.id }}" value="{{ list.id }}"><img class="icon-task" src="/static/check.svg"></button> 
+                                <button class="card-btn" type="submit" formaction="/{{ list.id }}/{{ task.id }}/deletetask" name="delete" value="{{ task.id }}" value="{{ list.id }}"><img class="icon-task" src="/static/delete.svg"></button>
+                                <button class="card-btn" type="submit" formaction="/{{ list.id }}/{{ task.id }}/edittask" name="edit" value="{{ task.id }}" value="{{ list.id }}"><img class="icon-task" src="/static/edit.svg"></button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                    {% endif %}
                 </ul> 
         </div>     
         {% endfor %}

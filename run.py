@@ -45,6 +45,12 @@ def new_task(list_id):
 @app.route('/show', methods=['POST'])
 @app.route('/')
 def show_all():
+
+    view = 'priority'
+    view_select = request.form.get('view')
+    if view_select == 'complete':
+        view = 'complete'
+
     list_options = List.query.all()
     select = request.form.get('list_select')
     if select == 'All Lists':
@@ -52,7 +58,7 @@ def show_all():
     else:
         lists = List.query.filter(List.id == select)
     tasks = List.query.filter(List.tasks).all()
-    return render_template ('tasks.html', lists=lists, tasks=tasks, list_options=list_options, list_select=select)
+    return render_template ('tasks.html', lists=lists, tasks=tasks, list_options=list_options, list_select=select, view=view)
 
 @app.route('/addlist', methods=['POST'])
 def add_list():

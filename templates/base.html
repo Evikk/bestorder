@@ -226,17 +226,19 @@ a.btn,
     {% block nav %}
     <ul class="navbar">
         <li><button class="card-btn"><a href="/newlist"><span>+</span></a></button></li>
-       <li><img src="/static/logo.png" class="logo"></li>
-       <li><form action="/show" method="POST">
+        <li><img src="/static/logo.png" class="logo"></li>
+        <li><form action="/show" method="POST">
            <select class="select-css" name="list_select" onchange="this.form.submit()">
                 <option selected>Select List</option>
                 {% for list in list_options %}
                 <option value="{{ list.id }}">{{ list.name }} </option>
                 {% endfor %}
                 <option>All Lists</option>
-           </select>
+            </select>
+            <input type="radio" name="view" value="priority" checked>Priority View
+            <input type="radio" name="view" value="complete">Complete View
            <!-- <button type="submit">Show List</button> -->
-       </form></li>
+        </form></li>
         
     {% endblock %}
         
