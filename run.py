@@ -88,7 +88,7 @@ def add_task(list_id):
     list_options = List.query.all()
     lists = List.query.filter(List.id == list_id).all()
     tasks = List.query.filter(List.tasks).all()
-    task = Task(name=request.form['name'], description=request.form['description'], done=False, list_id=list_id, priority=request.form['priority'])
+    task = Task(description=request.form['description'], done=False, list_id=list_id, priority=request.form['priority'])
     db.session.add(task)
     db.session.commit()
     
