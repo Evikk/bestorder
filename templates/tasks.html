@@ -9,7 +9,7 @@
                     <h2>{{ list.name }} </h2>
                 </div>
                 <div class="list-icons">
-                    <button class="card-btn"><a href="/{{list.id}}/newtask"><span>+</span></a></button>
+                    <a href="/{{list.id}}/newtask"><button class="card-btn m-fix"><span>+</span></button></a>
                     <form action="/{{list.id}}/deletelist" method="POST"><button class="card-btn"><img class="icon-task" src="/static/delete.svg"></button></form>
                 </div>
             </div>

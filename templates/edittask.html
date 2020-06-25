@@ -1,8 +1,16 @@
 {% include "base.html" %}
-<h3>EDIT TASK {{ task.name }}</h3>
-    <form action="/{{ list.id }}/{{ task.id }}/updatetask" method="POST"> 
-        <input type="text" name="name" value="{{ task.name }}">TASK TITLE
-        <input type="text" name="description" value="{{ task.description }}">DESCRIPTION
-        <input type="number" name="priority" min="1" max="5" value="{{task.priority}}">Priority
-        <input type="submit"> 
-    </form>
+
+
+    <div class="container">
+        <div class="new-list-card">
+            <h3>EDIT TASK {{ task.name }}</h3>
+            <form class="task-form" action="/{{ list.id }}/{{ task.id }}/updatetask" method="POST"> 
+                <!-- <input type="text" name="name" value="{{ task.name }}">TASK TITLE -->
+                <label class="form-label">Task Description</label>
+                <input class="input-css" type="text" name="description" value="{{ task.description }}">
+                <label class="form-label">Choose Priority</label>
+                <input class="input-css" type="number" name="priority" min="1" max="5" value="{{task.priority}}">
+                <div class="c-btn"><input class="card-btn" type="submit"></div>
+            </form>
+        </div>
+    </div>
