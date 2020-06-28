@@ -23,13 +23,6 @@ class List(db.Model):
     description = db.Column(db.Text)
     tasks = db.relationship('Task', backref='list')
 
-# @app.route('/')
-# def index():
-#     list_options = List.query.all()
-#     select = request.form.get('list_select')
-#     print(select)
-#     return render_template ('base.html', list_options=list_options, list_select=select)
-
 @app.route('/newlist')
 def new_list():
     list_options = List.query.all()

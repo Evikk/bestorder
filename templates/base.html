@@ -218,7 +218,7 @@ a.btn,
     display: flex;
     text-align: center;
     justify-content: center;
-    align-items:flex-start;
+    align-items:center;
 }
 
 .task-form{
@@ -229,9 +229,9 @@ a.btn,
     flex-direction: column;
 }
 
-/* .form-label{
+.form-label{
 
-} */
+}
 
 .new-list-card h3{
     text-align: center;
@@ -240,6 +240,20 @@ a.btn,
     margin: 0 10px;
 }
 
+.base-menu {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.menu-select {
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
 @media only screen and (max-width: 740px) {
   .navbar {
     padding: 0;
@@ -256,7 +270,8 @@ a.btn,
     padding: 10px 0;
     text-align: center;
     justify-content: center;
-    align-items:flex-start;
+    /* align-items:flex-start; */
+    padding: 5px 0;
     
     }
   .container{
@@ -272,17 +287,23 @@ a.btn,
     <ul class="navbar">
         
         <li><img src="/static/logo.png" class="logo"></li>
-        <li class="menu"><a href="/newlist"><button class="card-btn" style="height: 100%; margin: 3px 3px 0 0;"><span>+</span></button></a><form action="/show" method="POST">
-           <select class="select-css" name="list_select" onchange="this.form.submit()">
-                <option selected>Select List</option>
-                {% for list in list_options %}
-                <option value="{{ list.id }}">{{ list.name }} </option>
-                {% endfor %}
-                <option>All Lists</option>
-            </select>
-            <input type="radio" name="view" value="priority" checked>Priority View
-            <input type="radio" name="view" value="complete">Complete View
-           <!-- <button type="submit">Show List</button> -->
+        <li>
+            <div class="menu-select">    
+                <form class="menu" style="width:100%" action="/show" method="POST">
+                <select style="padding-top: 7px; padding-bottom: 5px;" class="select-css" name="list_select" onchange="this.form.submit()">
+                    <option selected>Select List</option>
+                    {% for list in list_options %}
+                    <option value="{{ list.id }}">{{ list.name }} </option>
+                    {% endfor %}
+                    <option>All Lists</option>
+                </select>
+                <a href="/newlist" title="Add New List"><button class="card-btn" style="height: 100%; margin: 0 0 0 10px;"><span>+</span></button></a>
+               
+            </div>
+        <div class="menu">
+        <input type="radio" name="view" value="priority" checked>Priority View
+        <input type="radio" name="view" value="complete">Complete View
+        </div>
         </form></li>
         
     {% endblock %}
